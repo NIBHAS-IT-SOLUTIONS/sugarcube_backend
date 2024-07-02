@@ -6,6 +6,11 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   address: { type: String },
+  role: {
+    type: String,
+    enum: ['customer', 'admin', 'delivery'],
+    default: 'customer',
+  }
 }, {
   timestamps: true,
 });

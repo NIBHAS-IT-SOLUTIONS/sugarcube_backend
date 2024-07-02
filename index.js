@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 const configDatabase=require('./database/database')
 
 const userRouter=require('./routes/Userroutes')
-const menuRouter=require('./routes/menuroutes')
+const menuRouter=require('./routes/menuroutesadmin')
 
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -23,7 +23,7 @@ configDatabase()
 
 
 app.use('/api/user',userRouter)
-app.use('/api/menu',menuRouter)
+app.use('/api/menu/admin',menuRouter)
 
 
  
@@ -31,3 +31,5 @@ app.use('/api/menu',menuRouter)
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
   });
+
+module.exports = app;

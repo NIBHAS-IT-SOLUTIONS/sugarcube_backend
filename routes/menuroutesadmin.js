@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const {addmenu} = require('../controllers/menucontrollers');
+//const {} = require('');
 const { verifyToken } = require('../middlewares/auth');
 
 
 
 
-router.get('/addmenu',verifyToken,addmenu)
+router.get('/addmenu',verifyToken)
 
 module.exports=router
