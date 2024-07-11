@@ -5,13 +5,14 @@ const jwt=require('jsonwebtoken')
 
 
 module.exports = {
-    signup: async (req, res) => {
+    addadmin: async (req, res) => {
         try{
         const {
             username,
             email,
             password
           } = req.body.userdata;
+      
           const user = await User.findOne({ email: email });
           if (user) return res.status(400).json({ msg: "Email Already Registered. " });
 
@@ -22,6 +23,7 @@ module.exports = {
             username,
             email,
             password: passwordHash,
+            role:'admin'
             
           });
           const savedUser = await newUser.save();
@@ -30,13 +32,15 @@ module.exports = {
           res.status(500).json({ error: err.message });
         }
     },
-    login: async(req,res) => {
+    adminlogin: async(req,res) => {
 
         try {
             const { email, password } = req.body;
             const user = await User.findOne({ email: email });
             if (!user) return res.status(400).json({ msg: "User does not exist. " });
-        
+            
+            if (user.role !== 'admin') return res.status(400).json({ msg: "Admin Access Only " });
+
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
         

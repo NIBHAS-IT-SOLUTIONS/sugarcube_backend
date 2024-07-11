@@ -12,6 +12,7 @@ const configDatabase=require('./database/database')
 
 const userRouter=require('./routes/Userroutes')
 const menuRouter=require('./routes/menuroutesadmin')
+const adminRouter=require('./routes/adminroutes')
 
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -21,9 +22,10 @@ app.use(express.json());
 app.use(bodyParser.json());
 configDatabase()
 
-
+ 
 app.use('/api/user',userRouter)
 app.use('/api/menu/admin',menuRouter)
+app.use('/api/admin',adminRouter)
 
 
  
